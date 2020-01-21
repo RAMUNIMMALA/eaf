@@ -81,5 +81,9 @@ public abstract class BaseTest implements IEAFbase {
     	return prop;
     }
     
+    private void initializeDriver() {
+    	
+    }
+    
     
 }
