@@ -17,8 +17,19 @@ public class ReportLog {
 		extentTest = extentReport.startTest("ExtentDemo");
 	}
 	
-	public static void Log(String message) {
-		//extentTest.log(LogStatus.INFO);
+	public static void LOG(String message) {
+		extentTest.log(LogStatus.INFO, message);
 	}
 
+	public static void PASS(String stepName) {
+		extentTest.log(LogStatus.PASS, stepName);
+	}
+	
+	public static void FAIL(String stepName) {
+		extentTest.log(LogStatus.FAIL, stepName);
+	}
+	
+	public static void WARNING(String stepName) {
+		extentTest.log(LogStatus.WARNING, stepName);
+	}
 }
