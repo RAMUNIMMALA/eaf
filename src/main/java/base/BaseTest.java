@@ -3,6 +3,7 @@ package base;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -147,6 +148,10 @@ public abstract class BaseTest implements IEAFbase {
 //			CommonVariables.driverIE2.manage().window().setPosition(new Point(0, 0));
 
 		} 
+    	
+    	getDrivevr().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); 
+    	getDrivevr().manage().window().maximize(); 
+    	getDrivevr().navigate().to(System.getProperty("browser"));
     }
     
     
