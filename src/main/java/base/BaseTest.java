@@ -5,9 +5,17 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -29,7 +37,7 @@ public abstract class BaseTest implements IEAFbase {
 
     }
     
-    public WebDriver getDrivevr() {
+    public WebDriver getDriver() {
 		return drivevr;
 	}
 
@@ -66,6 +74,7 @@ public abstract class BaseTest implements IEAFbase {
     @AfterMethod
     public void doAfterMethod() {
     	System.out.println("doAfterMethod");
+    	
     }
     
     @BeforeTest
@@ -109,26 +118,48 @@ public abstract class BaseTest implements IEAFbase {
     		System.out.println("IE Driver started");
 
 		} else if (browser.equalsIgnoreCase("Chrome")) {
-//			System.setProperty("webdriver.chrome.driver","S:\\Technology\\TTGACMX\\QA\\QA All\\Selenium and Eclipse Files\\IEDriverServer_Win32_3.4.0\\chromedriver.exe");
-//			CommonVariables.driver = new ChromeDriver();
-//			System.out.println("Chrome Driver started");
-//			CommonVariables.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//			CommonVariables.driver.manage().window().maximize(); // maximize the
-//			// window (just looks better and easier to
-//			// follow)
-//			// CommonVariables.driver.manage().window().setSize(new Dimension(500, 500));
-//			// ;
-//			// CommonVariables.driver.manage().window().setPosition(new Point(500, 600));
-//			CommonVariables.setParentWindowID(CommonVariables.driver.getWindowHandle());
+			System.setProperty("webdriver.chrome.driver","D:\\eclipse workspace\\eaf\\drivers\\chrome\\chromedriver.exe");
+			
+			DesiredCapabilities capabilities=new DesiredCapabilities();
+		//capabilities.setCapability("browser.download.dir","c:\\downloads");
+        	capabilities.setCapability("ignoreZoomSetting", true);
+			capabilities.setCapability(CapabilityType.BROWSER_NAME,"chrome");
+        	//capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        	capabilities.setCapability(ChromeOptions.CAPABILITY, false);
+        	capabilities.setCapability(ChromeOptions.CAPABILITY, true);
+        	capabilities.setCapability(ChromeOptions.CAPABILITY, true);
+        	//setDrivevr(new ChromeDriver()); // open IE
+			System.out.println("Chrome Driver started");			
+	getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		getDriver().manage().window().maximize(); // maximize the
+			// window (just looks better and easier to
+			// follow)
+			getDriver().manage().window().setSize(new Dimension(500, 500));
+
+           getDriver().manage().window().setPosition(new Point(500, 600));
+	//capabilities.setParentWindowID(getDriver().getWindowHandle());
+	
+	
 
 		} else if (browser.equalsIgnoreCase("Firefox")) {
-//			System.setProperty("webdriver.chrome.driver",
-//					"S:\\Technology\\TTGACMX\\QA\\QA All\\Selenium and Eclipse Files\\IEDriverServer_Win32_3.4.0\\geckodriver.exe");
-//			CommonVariables.driver = new FirefoxDriver();
-//			System.out.println("Firefox Driver started");
-//			CommonVariables.driver.manage().window().maximize(); // maximize the window (just looks better and
-//																	// easier to follow)
-//			CommonVariables.setParentWindowID(CommonVariables.driver.getWindowHandle());
+			System.setProperty("webdriver.firefox.driver",
+					"D:\\eclipse workspace\\eaf\\drivers\\firefox\\geckodriver.exe");
+			
+			System.out.println("Firefox Driver started");
+			 DesiredCapabilities capabilities = new DesiredCapabilities();
+			    FirefoxOptions options = new FirefoxOptions();
+			    options.setHeadless(true);
+			    capabilities.merge(options);
+			    //setDrivevr(new FirefoxDriver()); 
+			    getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+				getDriver().manage().window().maximize(); // maximize the
+					// window (just looks better and easier to
+					// follow)
+					getDriver().manage().window().setSize(new Dimension(500, 500));
+
+		           getDriver().manage().window().setPosition(new Point(500, 600));
+		
+			//getDriver().setParentWindowID(getDriver().getWindowHandle());
 
 		} else if (browser.equalsIgnoreCase("Edge")) {
 //			System.setProperty("webdriver.chrome.driver",
@@ -149,9 +180,10 @@ public abstract class BaseTest implements IEAFbase {
 
 		} 
     	
-    	getDrivevr().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); 
-    	getDrivevr().manage().window().maximize(); 
-    	getDrivevr().navigate().to(System.getProperty("browser"));
+    	//getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); 
+    	//getDriver().manage().window().maximize(); 
+    	//getDriver().navigate().to(System.getProperty("browser"));
+    	getDriver().navigate().to("https://www.google.com/?gws_rd=ssl");
     }
     
     
