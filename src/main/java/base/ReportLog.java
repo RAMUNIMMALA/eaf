@@ -1,5 +1,8 @@
 package base;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -10,11 +13,12 @@ public class ReportLog {
 	static ExtentReports extentReport;
 	
 	public static void initializeReport() {
-		extentReport = new ExtentReports(System.getProperty("user.dir")+"\\reports\\ExtentReportResults.html");
+		String currentDateTime =  String.valueOf(new SimpleDateFormat("MMddyyyyhhmmss").format(new Date()));
+		extentReport = new ExtentReports(System.getProperty("user.dir")+"\\reports\\ExtentReportResults_"+ currentDateTime +".html");
 	}
 
-	public static void startTest() {
-		extentTest = extentReport.startTest("ExtentDemo");
+	public static void startTest(String testTitle) {
+		extentTest = extentReport.startTest(testTitle);
 	}
 	
 	public static void LOG(String message) {
