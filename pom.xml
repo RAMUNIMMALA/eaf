@@ -17,6 +17,7 @@
 				<configuration>
 					<systemPropertyVariables>
 						<implicitWait>10</implicitWait>
+						<explicitWait>30</explicitWait>
 						<browserName>ie</browserName>
 						<appUrl></appUrl>
 					</systemPropertyVariables>
